@@ -1,4 +1,6 @@
-# Travel Plans API
+# Parcial 2
+
+## Nicolás Arango Ramos - 202220342
 
 API REST en NestJS para la gestión de planes de viaje con integración de datos geográficos desde RestCountries.
 
@@ -10,7 +12,7 @@ npm install
 
 Crear archivo `.env` en la raíz:
 ```
-MONGODB_URI=mongodb+srv://<usuario>:<password>@cluster0.avze3ez.mongodb.net/travel-plans
+MONGODB_URI=mongodb+srv://narangor:123@cluster0.avze3ez.mongodb.net/travel-plans
 ```
 
 ## Ejecución
@@ -34,8 +36,6 @@ Gestiona la información de países con una lógica de caché local:
 3. Si no existe, llama a `https://restcountries.com/v3.1/alpha/{code}`.
 4. Si la API responde con error (código inválido), lanza `NotFoundException (404)`.
 5. Si retorna datos, los persiste en MongoDB y retorna el país.
-
-Este módulo no tiene controlador. Su funcionalidad se expone únicamente a través de `CountriesService`, exportado para ser inyectado en otros módulos.
 
 ### TravelPlansModule (público)
 
@@ -77,12 +77,3 @@ Respuesta exitosa (201):
 
 ### Eliminar plan (DELETE /travel-plans/:id)
 No requiere body. Retorna `204 No Content`.
-
-## Limpieza de base de datos (antes del examen)
-
-```js
-// En MongoDB Compass o mongosh:
-use travel-plans
-db.countries.drop()
-db.travelplans.drop()
-```
