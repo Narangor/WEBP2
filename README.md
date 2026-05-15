@@ -145,4 +145,4 @@ await this.travelPlanModel.findByIdAndUpdate(
 ).exec();
 ```
 
-`$push` añade el nuevo objeto al final del array de forma atómica. La opción `{ new: true }` hace que Mongoose devuelva el documento ya actualizado con el gasto incluido. El esquema de `Expense` se define con `@Schema` de Mongoose y se embebe directamente en `TravelPlanSchema` mediante `@Prop({ type: [ExpenseSchema], default: [] })`.
+usando $push añade el nuevo objeto al final del array. La opción { new: true } hace que Mongoose devuelva el documento ya actualizado con el gasto incluido. El esquema de Expense se define con @Schema de Mongoose y se embebe directamente en TravelPlanSchema mediante @Prop({ type: [ExpenseSchema], default: [] })
