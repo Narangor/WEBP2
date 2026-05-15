@@ -12,7 +12,14 @@ const config_1 = require("@nestjs/config");
 const mongoose_1 = require("@nestjs/mongoose");
 const countries_module_1 = require("./countries/countries.module");
 const travel_plans_module_1 = require("./travel-plans/travel-plans.module");
+const users_module_1 = require("./users/users.module");
+const audit_middleware_1 = require("./common/middleware/audit.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(audit_middleware_1.AuditMiddleware)
+            .forRoutes('travel-plans', 'users');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
@@ -27,6 +34,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             countries_module_1.CountriesModule,
             travel_plans_module_1.TravelPlansModule,
+            users_module_1.UsersModule,
         ],
     })
 ], AppModule);

@@ -11,13 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TravelPlanSchema = exports.TravelPlan = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
+const expense_schema_1 = require("./expense.schema");
 let TravelPlan = class TravelPlan {
+    userId;
     title;
     startDate;
     endDate;
     destinationCountryCode;
+    expenses;
 };
 exports.TravelPlan = TravelPlan;
+__decorate([
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'User', required: true }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
+], TravelPlan.prototype, "userId", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
@@ -34,6 +42,10 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], TravelPlan.prototype, "destinationCountryCode", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: [expense_schema_1.ExpenseSchema], default: [] }),
+    __metadata("design:type", Array)
+], TravelPlan.prototype, "expenses", void 0);
 exports.TravelPlan = TravelPlan = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
 ], TravelPlan);

@@ -13,6 +13,7 @@ const travel_plans_controller_1 = require("./travel-plans.controller");
 const travel_plans_service_1 = require("./travel-plans.service");
 const travel_plan_schema_1 = require("./schemas/travel-plan.schema");
 const countries_module_1 = require("../countries/countries.module");
+const users_module_1 = require("../users/users.module");
 let TravelPlansModule = class TravelPlansModule {
 };
 exports.TravelPlansModule = TravelPlansModule;
@@ -21,6 +22,7 @@ exports.TravelPlansModule = TravelPlansModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: travel_plan_schema_1.TravelPlan.name, schema: travel_plan_schema_1.TravelPlanSchema }]),
             countries_module_1.CountriesModule,
+            users_module_1.UsersModule,
         ],
         controllers: [travel_plans_controller_1.TravelPlansController],
         providers: [travel_plans_service_1.TravelPlansService],

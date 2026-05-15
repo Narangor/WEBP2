@@ -18,16 +18,21 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const travel_plan_schema_1 = require("./schemas/travel-plan.schema");
 const countries_service_1 = require("../countries/countries.service");
+const users_service_1 = require("../users/users.service");
 let TravelPlansService = class TravelPlansService {
     travelPlanModel;
     countriesService;
-    constructor(travelPlanModel, countriesService) {
+    usersService;
+    constructor(travelPlanModel, countriesService, usersService) {
         this.travelPlanModel = travelPlanModel;
         this.countriesService = countriesService;
+        this.usersService = usersService;
     }
     async create(dto) {
         await this.countriesService.findOrFetch(dto.destinationCountryCode);
+        await this.usersService.findOne(dto.userId);
         const plan = new this.travelPlanModel({
+            userId: dto.userId,
             title: dto.title,
             startDate: new Date(dto.startDate),
             endDate: new Date(dto.endDate),
@@ -49,12 +54,19 @@ let TravelPlansService = class TravelPlansService {
         if (!result)
             throw new common_1.NotFoundException(`Travel plan '${id}' not found`);
     }
+    async addExpense(planId, dto) {
+        const plan = await this.travelPlanModel.findByIdAndUpdate(planId, { $push: { expenses: dto } }, { new: true }).exec();
+        if (!plan)
+            throw new common_1.NotFoundException(`Plan ${planId} no encontrado.`);
+        return plan;
+    }
 };
 exports.TravelPlansService = TravelPlansService;
 exports.TravelPlansService = TravelPlansService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(travel_plan_schema_1.TravelPlan.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        countries_service_1.CountriesService])
+        countries_service_1.CountriesService,
+        users_service_1.UsersService])
 ], TravelPlansService);
 //# sourceMappingURL=travel-plans.service.js.map

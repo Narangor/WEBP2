@@ -16,6 +16,7 @@ exports.TravelPlansController = void 0;
 const common_1 = require("@nestjs/common");
 const travel_plans_service_1 = require("./travel-plans.service");
 const create_travel_plan_dto_1 = require("./dto/create-travel-plan.dto");
+const create_expense_dto_1 = require("./dto/create-expense.dto");
 let TravelPlansController = class TravelPlansController {
     travelPlansService;
     constructor(travelPlansService) {
@@ -32,6 +33,9 @@ let TravelPlansController = class TravelPlansController {
     }
     remove(id) {
         return this.travelPlansService.remove(id);
+    }
+    addExpense(id, dto) {
+        return this.travelPlansService.addExpense(id, dto);
     }
 };
 exports.TravelPlansController = TravelPlansController;
@@ -63,6 +67,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], TravelPlansController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)(':id/expenses'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_expense_dto_1.CreateExpenseDto]),
+    __metadata("design:returntype", void 0)
+], TravelPlansController.prototype, "addExpense", null);
 exports.TravelPlansController = TravelPlansController = __decorate([
     (0, common_1.Controller)('travel-plans'),
     __metadata("design:paramtypes", [travel_plans_service_1.TravelPlansService])

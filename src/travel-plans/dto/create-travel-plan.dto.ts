@@ -1,6 +1,11 @@
-import { IsString, IsNotEmpty, IsDateString, Length, Matches } from 'class-validator';
+import { IsString, IsNotEmpty, IsDateString, Length, Matches, IsMongoId } from 'class-validator';
 
 export class CreateTravelPlanDto {
+
+  @IsMongoId({ message: 'userId debe ser un ObjectId válido.' })
+  @IsNotEmpty()
+  userId: string;
+
   @IsString()
   @IsNotEmpty()
   title: string;
@@ -17,4 +22,6 @@ export class CreateTravelPlanDto {
     message: 'destinationCountryCode must be exactly 3 uppercase letters (e.g. COL)',
   })
   destinationCountryCode: string;
+
+
 }

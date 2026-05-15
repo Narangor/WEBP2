@@ -12,12 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTravelPlanDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateTravelPlanDto {
+    userId;
     title;
     startDate;
     endDate;
     destinationCountryCode;
 }
 exports.CreateTravelPlanDto = CreateTravelPlanDto;
+__decorate([
+    (0, class_validator_1.IsMongoId)({ message: 'userId debe ser un ObjectId válido.' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateTravelPlanDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
